@@ -32,7 +32,7 @@ export class SearchPageComponent implements OnInit {
 			model: [ '' ],
 			year: [ '' ],
 			type: [ '' ],
-			color: [ '' ],
+			colors: [ '' ],
 			keyword: [ '' ],
 			vin: [ '' ]
 		});
@@ -49,14 +49,12 @@ export class SearchPageComponent implements OnInit {
 			make: this.form.controls['make'].value,
 			model: this.form.controls['model'].value,
 			year: this.form.controls['year'].value,
-			color: this.form.controls['color'].value,
-			keyword: this.form.controls['keyword'].value,
-			mileage: null,
-			salesPrice: null
+			colors: this.form.controls['colors'].value,
+			keyword: this.form.controls['keyword'].value
 		};
 
 		this.httpClient
-			.post(`${environment.baseUrl}/vehicles`, searchData, {
+			.post(`${environment.baseUrl}/searchVehicles`, searchData, {
 				headers: this.jsonHeader()
 			})
 			.subscribe((vehicles: Array<Vehicle>) => {

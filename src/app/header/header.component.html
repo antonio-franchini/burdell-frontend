@@ -4,19 +4,9 @@
 
   <!-- Links -->
   <ul class="navbar-nav ml-auto">
-    <ng-template [ngIf]="!isAuthenticated()">
-      <li class="nav-item"><a class="nav-link" routerLink="/search-page">Search</a></li>
-      <li class="nav-item"><a class="nav-link" routerLink="/login">Login</a></li>
-    </ng-template>
+    <li class="nav-item"><a class="nav-link" routerLink="/search-page">Search</a></li>
 
-    <li><a style="cursor: pointer;" (click)="onLogout()" *ngIf="isAuthenticated()">Logout</a></li>
-
-    <li class="dropdown" appDropdown *ngIf="isAuthenticated()">
-      <a style="cursor: pointer;" class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
-      <ul class="dropdown-menu">
-        <li><a style="cursor: pointer;" (click)="onSaveData()">Save Data</a></li>
-        <li><a style="cursor: pointer;" (click)="onFetchData()">Fetch Data</a></li>
-      </ul>
-    </li>
+    <li class="nav-item"><a class="nav-link" routerLink="/login" *ngIf="!isAuthenticated()">Login</a></li>
+    <li class="nav-item"><a class="nav-link" routerLink="/search-page" (click)="logout()" *ngIf="isAuthenticated()">Logout</a></li>
   </ul>
 </nav>

@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SearchPageComponent } from './search-page/search-page.component';
@@ -16,20 +15,12 @@ import { MatTableModule } from '@angular/material/table';
 
 const routes: Routes = [
 	{ path: 'login', component: LoginComponent },
-	{ path: 'register', component: RegisterComponent },
 	{ path: 'search-page', component: SearchPageComponent },
 	{ path: 'purchased-vehicle-form', component: PurchasedVehicleFormComponent }
 ];
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		HeaderComponent,
-		LoginComponent,
-		RegisterComponent,
-		SearchPageComponent,
-		PurchasedVehicleFormComponent
-	],
+	declarations: [ AppComponent, HeaderComponent, LoginComponent, SearchPageComponent, PurchasedVehicleFormComponent ],
 	imports: [
 		RouterModule.forRoot(routes),
 		BrowserModule,

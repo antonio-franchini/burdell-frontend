@@ -19,8 +19,8 @@
       <input type="text" class="form-control" formControlName="type">
     </div>
     <div class="form-group">
-      <label>Color:</label>
-      <input type="text" class="form-control" formControlName="color">
+      <label>Colors:</label>
+      <input type="text" class="form-control" formControlName="colors">
     </div>
     <div class="form-group">
       <label>Keyword:</label>
@@ -38,12 +38,8 @@
   </div>
 </form>
 
-<div>
   <a routerLink="/purchased-vehicle-form"><button type="submit" class="btn btn-primary">Add Vehicle</button></a>
-</div>
-<div>
   <button type="submit" class="btn btn-primary">View Reports</button>
-</div>
 
 <table mat-table [dataSource]="vehicles" class="mat-elevation-z8">
     <!-- COLUMN INFO -->
