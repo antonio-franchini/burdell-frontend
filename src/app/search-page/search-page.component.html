@@ -1,0 +1,102 @@
+<h1>Search Page</h1>
+<form [formGroup]="form" (ngSubmit)="searchVehicles()">
+  <div class="mt-5">
+
+    <div class="form-group">
+      <label>Make:</label>
+      <input type="text" class="form-control" formControlName="make">
+    </div>
+    <div class="form-group">
+      <label>Model:</label>
+      <input type="text" class="form-control" formControlName="model">
+    </div>
+    <div class="form-group">
+      <label>Year:</label>
+      <input type="text" class="form-control" formControlName="year">
+    </div>
+    <div class="form-group">
+      <label>Type:</label>
+      <input type="text" class="form-control" formControlName="type">
+    </div>
+    <div class="form-group">
+      <label>Color:</label>
+      <input type="text" class="form-control" formControlName="color">
+    </div>
+    <div class="form-group">
+      <label>Keyword:</label>
+      <input type="text" class="form-control" formControlName="keyword">
+    </div>
+    <div class="form-group">
+        <label>VIN:</label>
+        <input type="text" class="form-control" formControlName="vin">
+    </div>
+  
+    <div>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+
+  </div>
+</form>
+
+<div>
+  <a routerLink="/purchased-vehicle-form"><button type="submit" class="btn btn-primary">Add Vehicle</button></a>
+</div>
+<div>
+  <button type="submit" class="btn btn-primary">View Reports</button>
+</div>
+
+<table mat-table [dataSource]="vehicles" class="mat-elevation-z8">
+    <!-- COLUMN INFO -->
+     <!--vin Col -->
+      <ng-container matColumnDef="vin">
+        <th mat-header-cell *matHeaderCellDef>VIN</th>
+        <td mat-cell *matCellDef="let item"> {{item.vin}} </td>
+      </ng-container>
+    
+      <!--type Col -->
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>Type</th>
+        <td mat-cell *matCellDef="let item">{{item.type}} </td>
+      </ng-container>
+    
+      <!--make Col -->
+      <ng-container matColumnDef="make">
+        <th mat-header-cell *matHeaderCellDef>Make</th>
+        <td mat-cell *matCellDef="let item">{{item.make}} </td>
+      </ng-container>
+
+      <!--model Col -->
+      <ng-container matColumnDef="model">
+        <th mat-header-cell *matHeaderCellDef>Model</th>
+        <td mat-cell *matCellDef="let item">{{item.model}} </td>
+      </ng-container>
+
+      <!--year Col -->
+      <ng-container matColumnDef="year">
+        <th mat-header-cell *matHeaderCellDef>year</th>
+        <td mat-cell *matCellDef="let item">{{item.year}} </td>
+      </ng-container>
+
+      <!--colors Col -->
+      <ng-container matColumnDef="colors">
+        <th mat-header-cell *matHeaderCellDef>Colors</th>
+        <td mat-cell *matCellDef="let item">{{item.colors}} </td>
+      </ng-container>
+
+      <!--mileage Col -->
+      <ng-container matColumnDef="mileage">
+        <th mat-header-cell *matHeaderCellDef>Mileage</th>
+        <td mat-cell *matCellDef="let item">{{item.mileage}} </td>
+      </ng-container>
+
+      <!--price Col -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef>Price</th>
+        <td mat-cell *matCellDef="let item">{{item.price}} </td>
+      </ng-container>
+  
+      <!-- ROW Info-->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let rowData; columns: displayedColumns;"></tr>
+    </table>
+

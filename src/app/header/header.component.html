@@ -1,11 +1,11 @@
 <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
   <!-- Brand/logo -->
-  <a class="navbar-brand" href="#">Burdell's Ramblin' Wrecks</a>
+  <a class="navbar-brand" href="/search-page">Burdell's Ramblin' Wrecks</a>
 
   <!-- Links -->
   <ul class="navbar-nav ml-auto">
     <ng-template [ngIf]="!isAuthenticated()">
-      <li class="nav-item"><a class="nav-link" routerLink="/register">Register</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="/search-page">Search</a></li>
       <li class="nav-item"><a class="nav-link" routerLink="/login">Login</a></li>
     </ng-template>
 
