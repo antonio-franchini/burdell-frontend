@@ -1,0 +1,19 @@
+.highlight {
+    background: red;
+}
+
+table {
+    width: 100%;
+}
+
+.monthly-sales-table .mat-row:hover{
+    background: grey;
+}
+
+.monthly-sales-table .highlight{
+    background: lightgrey;
+}
+
+mat-form-field {
+    width: 100%;
+}

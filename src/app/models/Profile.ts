@@ -1,5 +1,7 @@
 export interface Profile {
 	username: string;
 	password: string;
-	role: string;
+	permission: string;
+	firstName: string;
+	lastName: string;
 }

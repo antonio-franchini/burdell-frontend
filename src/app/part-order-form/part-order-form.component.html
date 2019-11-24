@@ -1,0 +1,83 @@
+<br>
+<h1>Parts order form</h1>
+<br>
+<br>
+
+<form [formGroup]="form" (ngSubmit)="addPartsOrder()">
+
+        <label>VIN: {{vin}}</label>
+        <br>
+        <label>Username: {{username}}</label>
+        <br>
+        <mat-form-field>
+            <mat-select placeholder="Vendor name" formControlName="vendorName" name="vendor">
+                <mat-option *ngFor="let vendor of vendors" [value]="vendor.name">
+                  {{vendor.name}}
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
+          <button type="button" (click)="addVendor()">Add vendor</button>
+
+      <br>
+
+
+      <div formArrayName="parts" *ngFor="let part of form.get('parts').controls; let i = index;">
+        <div [formGroupName]="i">
+
+
+          <mat-form-field>
+              <mat-select placeholder="Part name" formControlName="part" name="option">
+                  <mat-option *ngFor="let option of options" [value]="option.partNumber">
+                    {{option.description}}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+
+        </div>
+      </div>
+      <button type="button" (click)="addPart()">Add another part</button>
+      <br>
+      <br>
+      <br>
+      <button type="submit" class="btn btn-primary">Place order</button>
+    
+
+</form>
+
+
+<form [formGroup]="vendorForm" (ngSubmit)="saveVendor()" *ngIf="showVendorForm">
+    <div class="mt-5">
+  
+      <div class="form-group">
+        <label>name:</label>
+        <input type="text" class="form-control" formControlName="name">
+      </div>
+      <div class="form-group">
+        <label>phone:</label>
+        <input type="text" class="form-control" formControlName="phone">
+      </div>
+      <div class="form-group">
+        <label>street:</label>
+        <input type="text" class="form-control" formControlName="street">
+      </div>
+      <div class="form-group">
+        <label>city:</label>
+        <input type="text" class="form-control" formControlName="city">
+      </div>
+      <div class="form-group">
+        <label>state:</label>
+        <input type="text" class="form-control" formControlName="state">
+      </div>
+      <div class="form-group">
+        <label>zipCode:</label>
+        <input type="text" class="form-control" formControlName="zipCode">
+      </div>
+  
+      <div>
+        <button type="submit" class="btn btn-primary">Save Vendor</button>
+      </div>
+  
+    </div>
+  </form>
+  

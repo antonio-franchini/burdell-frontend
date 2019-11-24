@@ -1,9 +1,62 @@
+<br>
+<br>
+
 <h1>Purchased Vehicle Form</h1>
 <form [formGroup]="form" (ngSubmit)="addVehicle()">
   <div class="mt-5">
+
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="Seller Customer" formControlName="sellerCustomerId" name="customer">
+          <mat-option *ngFor="let customer of customers" [value]="customer.customerId">
+            {{(customer.business === true) ? (customer.name) : (customer.firstName + ' ' + customer.lastName)}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <app-add-customer-form (customerSaved)="getCustomers()"></app-add-customer-form>
+    </div>
+
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="Condition" formControlName="condition" name="condition">
+          <mat-option *ngFor="let condition of conditions" [value]="condition">{{condition}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="Colors" formControlName="colors" name="colors" multiple>
+          <mat-option *ngFor="let color of colors" [value]="color.color">
+            {{color.color}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field>
+      <mat-select placeholder="Type" formControlName="type" name="type">
+        <mat-option *ngFor="let vehicleType of vehicleTypes" [value]="vehicleType.type">
+          {{vehicleType.type}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Make" formControlName="make" name="make">
+        <mat-option *ngFor="let vehicleMake of vehicleMakes" [value]="vehicleMake.make">
+          {{vehicleMake.make}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <div class="form-group">
-      <label>Make:</label>
-      <input type="text" class="form-control" formControlName="make">
+      <label>Inventory clerk username:</label>
+      <input type="text" [value]="username" class="form-control" formControlName="inventoryClerkName">
+    </div>
+    <div class="form-group">
+      <label>VIN:</label>
+      <input type="text" class="form-control" formControlName="vin">
     </div>
     <div class="form-group">
       <label>Model:</label>
@@ -14,29 +67,33 @@
       <input type="text" class="form-control" formControlName="year">
     </div>
     <div class="form-group">
-      <label>Type:</label>
-      <input type="text" class="form-control" formControlName="type">
+      <label>Mileage:</label>
+      <input type="text" class="form-control" formControlName="mileage">
     </div>
     <div class="form-group">
-      <label>Colors:</label>
-      <input type="text" class="form-control" formControlName="colors">
+      <label>Description:</label>
+      <input type="text" class="form-control" formControlName="description">
     </div>
     <div class="form-group">
-      <label>VIN:</label>
-      <input type="text" class="form-control" formControlName="vin">
-    </div>
-    <div class="form-group">
-      <label>Purchase Date (yyyy-[m]m-[d]d):</label>
-      <input type="text" class="form-control" formControlName="purchaseDate">
-    </div>
-    <div class="form-group">
-      <label>Price:</label>
-      <input type="text" class="form-control" formControlName="price">
+      <label>Purchase price:</label>
+      <input type="text" class="form-control" formControlName="purchasePrice">
     </div>
 
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Purchase date" formControlName="purchaseDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <br>
+    <br>
+
     <div>
-      <button type="submit" class="btn btn-primary">Add</button>
+      <button type="submit" class="btn btn-primary">Save Vehicle</button>
     </div>
 
   </div>
 </form>
+
+<br>
+<br>

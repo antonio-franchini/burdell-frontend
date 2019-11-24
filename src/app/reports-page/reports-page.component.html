@@ -1,0 +1,267 @@
+<br>
+
+<h1>Reports</h1>
+
+<mat-form-field>
+  <mat-select [(value)]="selection" (selectionChange)="loadReport($event.value)">
+    <mat-option value={{reportEnum.SELLER_HISTORY}}>{{reportEnum.SELLER_HISTORY}}</mat-option>
+    <mat-option value={{reportEnum.AVERAGE_TIME_IN_HISTORY}}>{{reportEnum.AVERAGE_TIME_IN_HISTORY}}</mat-option>
+    <mat-option value={{reportEnum.PRICE_PER_CONDITION}}>{{reportEnum.PRICE_PER_CONDITION}}</mat-option>
+    <mat-option value={{reportEnum.PARTS_STATISTICS}}>{{reportEnum.PARTS_STATISTICS}}</mat-option>
+    <mat-option value={{reportEnum.MONTHLY_LOAN_INCOME}}>{{reportEnum.MONTHLY_LOAN_INCOME}}</mat-option>
+    <mat-option value={{reportEnum.MONTHLY_SALES}}>{{reportEnum.MONTHLY_SALES}}</mat-option>
+  </mat-select>
+</mat-form-field>
+<br>
+
+<div *ngIf="selection === reportEnum.SELLER_HISTORY">
+  <h2>{{reportEnum.SELLER_HISTORY}} Report</h2>
+  <table mat-table [dataSource]="sellerHistoryList" class="mat-elevation-z8" *ngIf="sellerHistoryList.length > 0">
+    <!-- COLUMN INFO -->
+    <!--name Col -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name of Seller</th>
+      <td mat-cell *matCellDef="let item"> {{item.name}} </td>
+    </ng-container>
+
+    <!--totalVehiclesSold Col -->
+    <ng-container matColumnDef="totalVehiclesSold">
+      <th mat-header-cell *matHeaderCellDef>Total Number of Vehicles Sold</th>
+      <td mat-cell *matCellDef="let item">{{item.totalVehiclesSold}} </td>
+    </ng-container>
+
+    <!--avgVehiclePrice Col -->
+    <ng-container matColumnDef="avgVehiclePrice">
+      <th mat-header-cell *matHeaderCellDef>Average Vehicle Purchase Price</th>
+      <td mat-cell *matCellDef="let item">{{item.avgVehiclePrice.toFixed(2)}} </td>
+    </ng-container>
+
+    <!--avgParts Col -->
+    <ng-container matColumnDef="avgParts">
+      <th mat-header-cell *matHeaderCellDef>Average Number of Parts per Vehicle</th>
+      <td mat-cell *matCellDef="let item">{{item.avgParts.toFixed(2)}} </td>
+    </ng-container>
+
+    <!--avgPartsCost Col -->
+    <ng-container matColumnDef="avgPartsCost">
+      <th mat-header-cell *matHeaderCellDef>Average Cost of Parts per Vehicle</th>
+      <td mat-cell *matCellDef="let item">{{item.avgPartsCost.toFixed(2)}} </td>
+    </ng-container>
+
+    <!-- ROW Info-->
+    <tr mat-header-row *matHeaderRowDef="sellerHistoryDisplayedColumns"></tr>
+    <tr class="btn-item" mat-row *matRowDef="let rowData; columns: sellerHistoryDisplayedColumns;"
+      [ngClass]="{'highlight': rowData.avgParts >= 5 || rowData.avgPartsCost >= 500}">
+    </tr>
+
+    </table>
+</div>
+
+<div *ngIf="selection === reportEnum.AVERAGE_TIME_IN_HISTORY">
+  <h2>{{reportEnum.AVERAGE_TIME_IN_HISTORY}} Report</h2>
+  <table mat-table [dataSource]="vehicleAvgDaysList" class="mat-elevation-z8" *ngIf="vehicleAvgDaysList.length > 0">
+    <!-- COLUMN INFO -->
+    <!--type Col -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>Vehicle Type</th>
+      <td mat-cell *matCellDef="let item"> {{item.type}} </td>
+    </ng-container>
+
+    <!--avg Col -->
+    <ng-container matColumnDef="avg">
+      <th mat-header-cell *matHeaderCellDef>Average Time in Inventory</th>
+      <td mat-cell *matCellDef="let item">{{item.avg}} </td>
+    </ng-container>
+
+    <!-- ROW Info-->
+    <tr mat-header-row *matHeaderRowDef="vehicleAvgDaysDisplayedColumns"></tr>
+    <tr class="btn-item" mat-row *matRowDef="let rowData; columns: vehicleAvgDaysDisplayedColumns;">
+    </tr>
+
+  </table>
+</div>
+
+<div *ngIf="selection === reportEnum.PRICE_PER_CONDITION">
+  <h2>{{reportEnum.PRICE_PER_CONDITION}} Report</h2>
+  <table mat-table [dataSource]="pricePerConditionList" class="mat-elevation-z8" *ngIf="pricePerConditionList.length > 0">
+    <!-- COLUMN INFO -->
+    <!--type Col -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>Vehicle Type</th>
+      <td mat-cell *matCellDef="let item"> {{item.type}} </td>
+    </ng-container>
+
+    <!--excellent Col -->
+    <ng-container matColumnDef="excellent">
+      <th mat-header-cell *matHeaderCellDef>Excellent</th>
+      <td mat-cell *matCellDef="let item">{{item.excellent}} </td>
+    </ng-container>
+
+    <!--veryGood Col -->
+    <ng-container matColumnDef="veryGood">
+      <th mat-header-cell *matHeaderCellDef>Very Good</th>
+      <td mat-cell *matCellDef="let item">{{item.veryGood}} </td>
+    </ng-container>
+
+    <!--good Col -->
+    <ng-container matColumnDef="good">
+      <th mat-header-cell *matHeaderCellDef>Good</th>
+      <td mat-cell *matCellDef="let item">{{item.good}} </td>
+    </ng-container>
+
+    <!--fair Col -->
+    <ng-container matColumnDef="fair">
+      <th mat-header-cell *matHeaderCellDef>Fair</th>
+      <td mat-cell *matCellDef="let item">{{item.fair}} </td>
+    </ng-container>
+
+    <!-- ROW Info-->
+    <tr mat-header-row *matHeaderRowDef="pricePerConditionDisplayedColumns"></tr>
+    <tr class="btn-item" mat-row *matRowDef="let rowData; columns: pricePerConditionDisplayedColumns;">
+    </tr>
+
+  </table>
+</div>
+
+<div *ngIf="selection === reportEnum.PARTS_STATISTICS">
+  <h2>{{reportEnum.PARTS_STATISTICS}} Report</h2>
+  <table mat-table [dataSource]="partsReportList" class="mat-elevation-z8" *ngIf="partsReportList.length > 0">
+    <!-- COLUMN INFO -->
+    <!--vendorName Col -->
+    <ng-container matColumnDef="vendorName">
+      <th mat-header-cell *matHeaderCellDef>Vendor Name</th>
+      <td mat-cell *matCellDef="let item"> {{item.vendorName}} </td>
+    </ng-container>
+
+    <!--numPartsSold Col -->
+    <ng-container matColumnDef="numPartsSold">
+      <th mat-header-cell *matHeaderCellDef>Total Number of Parts Sold</th>
+      <td mat-cell *matCellDef="let item">{{item.numPartsSold}} </td>
+    </ng-container>
+
+    <!--totalDollarAmount Col -->
+    <ng-container matColumnDef="totalDollarAmount">
+      <th mat-header-cell *matHeaderCellDef>Total Amount Spent</th>
+      <td mat-cell *matCellDef="let item">{{item.totalDollarAmount}} </td>
+    </ng-container>
+
+    <!-- ROW Info-->
+    <tr mat-header-row *matHeaderRowDef="partsReportDisplayedColumns"></tr>
+    <tr class="btn-item" mat-row *matRowDef="let rowData; columns: partsReportDisplayedColumns;">
+    </tr>
+
+  </table>
+</div>
+
+<div *ngIf="selection === reportEnum.MONTHLY_LOAN_INCOME">
+  <h2>{{reportEnum.MONTHLY_LOAN_INCOME}} Report</h2>
+  <table mat-table [dataSource]="loanIncomeList" class="mat-elevation-z8" *ngIf="loanIncomeList.length > 0">
+    <!-- COLUMN INFO -->
+    <!--year Col -->
+    <ng-container matColumnDef="year">
+      <th mat-header-cell *matHeaderCellDef>Year</th>
+      <td mat-cell *matCellDef="let item"> {{item.year}} </td>
+    </ng-container>
+
+    <!--month Col -->
+    <ng-container matColumnDef="month">
+      <th mat-header-cell *matHeaderCellDef>Month</th>
+      <td mat-cell *matCellDef="let item"> {{getMonthStringFromInt(item.month)}} </td>
+    </ng-container>
+
+    <!--monthlyPaymentTotal Col -->
+    <ng-container matColumnDef="monthlyPaymentTotal">
+      <th mat-header-cell *matHeaderCellDef>Expected Payment Amount</th>
+      <td mat-cell *matCellDef="let item">{{item.monthlyPaymentTotal}} </td>
+    </ng-container>
+
+    <!--monthlyShare Col -->
+    <ng-container matColumnDef="monthlyShare">
+      <th mat-header-cell *matHeaderCellDef>1% Monthly Payment Total</th>
+      <td mat-cell *matCellDef="let item">{{item.monthlyShare}} </td>
+    </ng-container>
+
+    <!-- ROW Info-->
+    <tr mat-header-row *matHeaderRowDef="loanIncomeDisplayedColumns"></tr>
+    <tr class="btn-item" mat-row *matRowDef="let rowData; columns: loanIncomeDisplayedColumns;">
+    </tr>
+
+  </table>
+</div>
+
+<div *ngIf="selection === reportEnum.MONTHLY_SALES">
+  <h2>{{reportEnum.MONTHLY_SALES}} Report</h2>
+  <table mat-table [dataSource]="saleDetailList" class="mat-elevation-z8 monthly-sales-table" *ngIf="saleDetailList.length > 0">
+    <!-- COLUMN INFO -->
+    <!--saleMonth Col -->
+    <ng-container matColumnDef="saleMonth">
+      <th mat-header-cell *matHeaderCellDef>Sale Month</th>
+      <td mat-cell *matCellDef="let item"> {{item.saleMonth}} </td>
+    </ng-container>
+
+    <!--vehiclesSold Col -->
+    <ng-container matColumnDef="vehiclesSold">
+      <th mat-header-cell *matHeaderCellDef>Number of Vehicles Sold</th>
+      <td mat-cell *matCellDef="let item"> {{item.vehiclesSold}} </td>
+    </ng-container>
+
+    <!--totalSales Col -->
+    <ng-container matColumnDef="totalSales">
+      <th mat-header-cell *matHeaderCellDef>Total Sales</th>
+      <td mat-cell *matCellDef="let item">{{item.totalSales}} </td>
+    </ng-container>
+
+    <!--netIncome Col -->
+    <ng-container matColumnDef="netIncome">
+      <th mat-header-cell *matHeaderCellDef>Net Income</th>
+      <td mat-cell *matCellDef="let item">{{item.netIncome}} </td>
+    </ng-container>
+
+    <!-- ROW Info-->
+    <tr mat-header-row *matHeaderRowDef="saleDetailDisplayedColumns"></tr>
+    <tr class="btn-item" mat-row *matRowDef="let rowData; columns: saleDetailDisplayedColumns;"
+      [ngClass]="{'highlight': monthlySalesSelection == rowData.saleMonth}"
+      (click)="viewDetails(rowData)">
+    </tr>
+
+  </table>
+</div>
+
+<br>
+
+<div *ngIf="salepersonPerformanceReportList.length > 0">
+  <h2>{{reportEnum.TOP_PERFORMING_SALESPEOPLE}} Report</h2>
+  <table mat-table [dataSource]="salepersonPerformanceReportList" class="mat-elevation-z8">
+    <!-- COLUMN INFO -->
+    <!--salepersonFirstName Col -->
+    <ng-container matColumnDef="salepersonFirstName">
+      <th mat-header-cell *matHeaderCellDef>Salesperson First Name</th>
+      <td mat-cell *matCellDef="let item"> {{item.salepersonFirstName}} </td>
+    </ng-container>
+
+    <!--salepersonLastName Col -->
+    <ng-container matColumnDef="salepersonLastName">
+      <th mat-header-cell *matHeaderCellDef>Salesperson Last Name</th>
+      <td mat-cell *matCellDef="let item"> {{item.salepersonLastName}} </td>
+    </ng-container>
+
+    <!--vehiclesSold Col -->
+    <ng-container matColumnDef="vehiclesSold">
+      <th mat-header-cell *matHeaderCellDef>Number of Vehicles Sold</th>
+      <td mat-cell *matCellDef="let item"> {{item.vehiclesSold}} </td>
+    </ng-container>
+
+    <!--totalSales Col -->
+    <ng-container matColumnDef="totalSales">
+      <th mat-header-cell *matHeaderCellDef>Total Sales</th>
+      <td mat-cell *matCellDef="let item">{{item.totalSales}} </td>
+    </ng-container>
+
+    <!-- ROW Info-->
+    <tr mat-header-row *matHeaderRowDef="salepersonPerformanceReportDisplayedColumns"></tr>
+    <tr class="btn-item" mat-row *matRowDef="let rowData; columns: salepersonPerformanceReportDisplayedColumns;"
+      (click)="viewDetails(rowData)">
+    </tr>
+
+  </table>
+</div>

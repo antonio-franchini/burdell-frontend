@@ -6,7 +6,7 @@
   <ul class="navbar-nav ml-auto">
     <li class="nav-item"><a class="nav-link" routerLink="/search-page">Search</a></li>
 
-    <li class="nav-item"><a class="nav-link" routerLink="/login" *ngIf="!isAuthenticated()">Login</a></li>
-    <li class="nav-item"><a class="nav-link" routerLink="/search-page" (click)="logout()" *ngIf="isAuthenticated()">Logout</a></li>
+    <li class="nav-item"><a class="nav-link" routerLink="/login" *ngIf="!stateService.isAuthenticated()">Login</a></li>
+    <li class="nav-item"><a class="nav-link" routerLink="/search-page" (click)="logout()" *ngIf="stateService.isAuthenticated()">Logout ({{stateService.getPermission()}})</a></li>
   </ul>
 </nav>

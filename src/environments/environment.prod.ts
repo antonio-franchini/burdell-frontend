@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+	baseUrl: 'https://burdell-backend.cfapps.io/',
+	production: true
 };

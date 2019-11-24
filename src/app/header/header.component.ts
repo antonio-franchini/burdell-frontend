@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ProfileService } from '../services/profile.service';
+import { StateService } from '../services/state.service';
 
 @Component({
 	selector: 'app-header',
@@ -8,19 +8,17 @@ import { ProfileService } from '../services/profile.service';
 })
 export class HeaderComponent implements OnInit {
 	authenticated: boolean = false;
+	permission: string = '';
 
-	constructor(private profileService: ProfileService) {}
+	constructor(private stateService: StateService) {
+		const profile = this.stateService.getCurrentProfile();
+		this.permission = profile == null ? null : profile.permission;
+	}
 
 	ngOnInit() {}
 
 	logout() {
-		this.profileService.setRole(null);
-		console.log('logging out');
-		console.log('this.profileService.getRole()', this.profileService.getRole());
+		this.stateService.setCurrentProfile(null);
 		this.ngOnInit();
-	}
-
-	isAuthenticated() {
-		return !(this.profileService.getRole() === null);
 	}
 }

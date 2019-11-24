@@ -1,0 +1,4 @@
+name: burdell-frontend
+path: dist/burdell-frontend
+buildpack: staticfile_buildpack
+memory: 256M

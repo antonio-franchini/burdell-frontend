@@ -1,0 +1,57 @@
+<br>
+<h1>Sale order form</h1>
+<br>
+<br>
+
+<form [formGroup]="form" (ngSubmit)="addSaleOrder()">
+
+        <label>VIN: {{vin}}</label>
+        <br>
+        <label>Username: {{username}}</label>
+        <br>
+        <mat-form-field>
+            <mat-select placeholder="Customer" formControlName="customerId" name="customer">
+                <mat-option *ngFor="let customer of customers" [value]="customer.customerId">
+                  {{(customer.business === true) ? (customer.name) : (customer.firstName + ' ' + customer.lastName)}}
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
+          <app-add-customer-form (customerSaved)="getCustomers()"></app-add-customer-form>
+
+    <br>
+    <button type="button" (click)="addLoan()">Add loan</button>
+    <br>
+    <br>
+
+    <!--Loan info-->
+    <div *ngIf="setUpLoan === true">
+        <h5>Loan information</h5>
+        <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Start month" formControlName="startMonth">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <br>
+          <label>Term:</label>
+        <input type="text" class="form-control" formControlName="term">
+        <label>Payment:</label>
+        <input type="text" class="form-control" formControlName="payment">
+        <label>Interest:</label>
+        <input type="text" class="form-control" formControlName="interest">
+        <label>Down payment:</label>
+        <input type="text" class="form-control" formControlName="downPayment">
+      </div>
+  
+      <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Sale date" formControlName="saleDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <div>
+            <button type="submit" class="btn btn-primary">Place sale order</button>
+        </div>
+    
+</form>
+
+

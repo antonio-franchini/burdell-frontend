@@ -1,11 +1,47 @@
+<br>
+
 <h1>Search Page</h1>
 <form [formGroup]="form" (ngSubmit)="searchVehicles()">
   <div class="mt-5">
 
-    <div class="form-group">
-      <label>Make:</label>
-      <input type="text" class="form-control" formControlName="make">
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="Status" formControlName="status" name="status">
+          <mat-option *ngFor="let status of statuses" [value]="status">{{status}}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
+
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="Colors" formControlName="colors" name="colors">
+          <mat-option *ngFor="let color of colors" [value]="color.color">
+            {{color.color}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="Type" formControlName="type" name="type">
+          <mat-option *ngFor="let vehicleType of vehicleTypes" [value]="vehicleType.type">
+            {{vehicleType.type}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="Make" formControlName="make" name="make">
+          <mat-option *ngFor="let vehicleMake of vehicleMakes" [value]="vehicleMake.make">
+            {{vehicleMake.make}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
     <div class="form-group">
       <label>Model:</label>
       <input type="text" class="form-control" formControlName="model">
@@ -14,85 +50,92 @@
       <label>Year:</label>
       <input type="text" class="form-control" formControlName="year">
     </div>
-    <div class="form-group">
-      <label>Type:</label>
-      <input type="text" class="form-control" formControlName="type">
-    </div>
-    <div class="form-group">
-      <label>Colors:</label>
-      <input type="text" class="form-control" formControlName="colors">
-    </div>
+
+
     <div class="form-group">
       <label>Keyword:</label>
       <input type="text" class="form-control" formControlName="keyword">
     </div>
-    <div class="form-group">
-        <label>VIN:</label>
-        <input type="text" class="form-control" formControlName="vin">
+    <div class="form-group" *ngIf="stateService.isAuthenticated()">
+      <label>VIN:</label>
+      <input type="text" class="form-control" formControlName="vin">
     </div>
-  
+
     <div>
       <button type="submit" class="btn btn-primary">Search</button>
+      <a routerLink="/purchased-vehicle-form"><button type="submit" class="btn btn-primary"
+          *ngIf="stateService.permissionMatches('inventory clerk')">Add Vehicle</button></a>
+
+      <a routerLink="/reports-page"><button type="submit" class="btn btn-primary"
+          *ngIf="stateService.permissionMatches('manager')">View Reports</button></a>
     </div>
 
   </div>
 </form>
 
-  <a routerLink="/purchased-vehicle-form"><button type="submit" class="btn btn-primary">Add Vehicle</button></a>
-  <button type="submit" class="btn btn-primary">View Reports</button>
 
-<table mat-table [dataSource]="vehicles" class="mat-elevation-z8">
-    <!-- COLUMN INFO -->
-     <!--vin Col -->
-      <ng-container matColumnDef="vin">
-        <th mat-header-cell *matHeaderCellDef>VIN</th>
-        <td mat-cell *matCellDef="let item"> {{item.vin}} </td>
-      </ng-container>
-    
-      <!--type Col -->
-      <ng-container matColumnDef="type">
-        <th mat-header-cell *matHeaderCellDef>Type</th>
-        <td mat-cell *matCellDef="let item">{{item.type}} </td>
-      </ng-container>
-    
-      <!--make Col -->
-      <ng-container matColumnDef="make">
-        <th mat-header-cell *matHeaderCellDef>Make</th>
-        <td mat-cell *matCellDef="let item">{{item.make}} </td>
-      </ng-container>
+<br>
+<br>
 
-      <!--model Col -->
-      <ng-container matColumnDef="model">
-        <th mat-header-cell *matHeaderCellDef>Model</th>
-        <td mat-cell *matCellDef="let item">{{item.model}} </td>
-      </ng-container>
 
-      <!--year Col -->
-      <ng-container matColumnDef="year">
-        <th mat-header-cell *matHeaderCellDef>year</th>
-        <td mat-cell *matCellDef="let item">{{item.year}} </td>
-      </ng-container>
+<h3 *ngIf="vehicles.length > 0">Vehicles</h3>
+<table mat-table [dataSource]="vehicles" class="mat-elevation-z8" *ngIf="vehicles.length > 0">
+  <!-- COLUMN INFO -->
+  <!--vin Col -->
+  <ng-container matColumnDef="vin">
+    <th mat-header-cell *matHeaderCellDef>VIN</th>
+    <td mat-cell *matCellDef="let item"> {{item.vin}} </td>
+  </ng-container>
 
-      <!--colors Col -->
-      <ng-container matColumnDef="colors">
-        <th mat-header-cell *matHeaderCellDef>Colors</th>
-        <td mat-cell *matCellDef="let item">{{item.colors}} </td>
-      </ng-container>
+  <!--type Col -->
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef>Type</th>
+    <td mat-cell *matCellDef="let item">{{item.type}} </td>
+  </ng-container>
 
-      <!--mileage Col -->
-      <ng-container matColumnDef="mileage">
-        <th mat-header-cell *matHeaderCellDef>Mileage</th>
-        <td mat-cell *matCellDef="let item">{{item.mileage}} </td>
-      </ng-container>
+  <!--make Col -->
+  <ng-container matColumnDef="make">
+    <th mat-header-cell *matHeaderCellDef>Make</th>
+    <td mat-cell *matCellDef="let item">{{item.make}} </td>
+  </ng-container>
 
-      <!--price Col -->
-      <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef>Price</th>
-        <td mat-cell *matCellDef="let item">{{item.price}} </td>
-      </ng-container>
-  
-      <!-- ROW Info-->
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let rowData; columns: displayedColumns;"></tr>
-    </table>
+  <!--model Col -->
+  <ng-container matColumnDef="model">
+    <th mat-header-cell *matHeaderCellDef>Model</th>
+    <td mat-cell *matCellDef="let item">{{item.model}} </td>
+  </ng-container>
 
+  <!--year Col -->
+  <ng-container matColumnDef="year">
+    <th mat-header-cell *matHeaderCellDef>year</th>
+    <td mat-cell *matCellDef="let item">{{item.year}} </td>
+  </ng-container>
+
+  <!--colors Col -->
+  <ng-container matColumnDef="colors">
+    <th mat-header-cell *matHeaderCellDef>Colors</th>
+    <td mat-cell *matCellDef="let item">{{item.colors}} </td>
+  </ng-container>
+
+  <!--mileage Col -->
+  <ng-container matColumnDef="mileage">
+    <th mat-header-cell *matHeaderCellDef>Mileage</th>
+    <td mat-cell *matCellDef="let item">{{item.mileage}} </td>
+  </ng-container>
+
+  <!--price Col -->
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef>Price</th>
+    <td mat-cell *matCellDef="let item">{{item.purchasePrice}} </td>
+  </ng-container>
+
+  <!-- ROW Info-->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr class="btn-item" mat-row *matRowDef="let rowData; columns: displayedColumns;"
+    [ngClass]="{'highlight': selectedRowIndex == rowData.id}" (click)="viewDetails(rowData)"></tr>
+
+</table>
+
+<h4 *ngIf="vehicles.length == 0">Sorry, it looks like we don’t have that in stock!</h4>
+<br>
+<br>
