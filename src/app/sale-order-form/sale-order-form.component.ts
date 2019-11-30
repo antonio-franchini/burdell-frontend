@@ -100,6 +100,12 @@ export class SaleOrderFormComponent implements OnInit {
 			.post(`${environment.baseUrl}/addSaleOrder`, saleOrder, {
 				headers: this.jsonHeader()
 			})
-			.subscribe(() => {});
+			.subscribe((success) => {
+				if (success) {
+					alert('Success!');
+				} else {
+					alert('Failure!');
+				}
+			});
 	}
 }

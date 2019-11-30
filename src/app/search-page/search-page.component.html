@@ -71,71 +71,208 @@
     </div>
 
   </div>
+
+
+  <br>
+  <br>
+
+
+  <h3 *ngIf="vehicles.length > 0">Vehicles</h3>
+  <div>
+    <table mat-table [dataSource]="vehicles" class="mat-elevation-z8" *ngIf="vehicles.length > 0">
+
+      <ng-container matColumnDef="parent1">
+        <th class="filterRow" *matHeaderCellDef colspan="1">
+          <mat-form-field class="filterContent">
+            <input matInput (input)="setFilter('filter1', $event.target.value)" placeholder="Filter"
+              [matAutocomplete]="auto1" formControlName="filter1" />
+            <button mat-button mat-icon-button class="custom" matSuffix *ngIf="form.value.filter1 !== ''"
+              (click)="setFilter('filter1', '')">
+              <mat-icon matSuffix>close</mat-icon>
+            </button>
+            <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="setFilter('filter1', $event.option.value)">
+              <mat-option *ngFor="let option of productNames" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </th>
+      </ng-container>
+
+      <ng-container matColumnDef="parent2">
+        <th class="filterRow" *matHeaderCellDef colspan="1">
+          <mat-form-field class="filterContent">
+            <input matInput (input)="setFilter('filter2', $event.target.value)" placeholder="Filter"
+              [matAutocomplete]="auto2" formControlName="filter2" />
+            <button mat-button mat-icon-button class="custom" matSuffix *ngIf="form.value.filter2 !== ''"
+              (click)="setFilter('filter2', '')">
+              <mat-icon matSuffix>close</mat-icon>
+            </button>
+            <mat-autocomplete #auto2="matAutocomplete" (optionSelected)="setFilter('filter2', $event.option.value)">
+              <mat-option *ngFor="let option of operationNames" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </th>
+      </ng-container>
+
+      <ng-container matColumnDef="parent3">
+        <th class="filterRow" *matHeaderCellDef colspan="1">
+          <mat-form-field class="filterContent">
+            <input matInput (input)="setFilter('filter3', $event.target.value)" placeholder="Filter"
+              [matAutocomplete]="auto3" formControlName="filter3" />
+            <button mat-button mat-icon-button class="custom" matSuffix *ngIf="form.value.filter3 !== ''"
+              (click)="setFilter('filter3', '')">
+              <mat-icon matSuffix>close</mat-icon>
+            </button>
+            <mat-autocomplete #auto3="matAutocomplete" (optionSelected)="setFilter('filter3', $event.option.value)">
+              <mat-option *ngFor="let option of batchJobNames" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </th>
+      </ng-container>
+
+      <ng-container matColumnDef="parent4">
+        <th class="filterRow" *matHeaderCellDef colspan="1">
+          <mat-form-field class="filterContent">
+            <input matInput (input)="setFilter('filter4', $event.target.value)" placeholder="Filter"
+              [matAutocomplete]="auto4" formControlName="filter4" />
+            <button mat-button mat-icon-button class="custom" matSuffix *ngIf="form.value.filter4 !== ''"
+              (click)="setFilter('filter4', '')">
+              <mat-icon matSuffix>close</mat-icon>
+            </button>
+            <mat-autocomplete #auto4="matAutocomplete" (optionSelected)="setFilter('filter4', $event.option.value)">
+              <mat-option *ngFor="let option of productNames" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </th>
+      </ng-container>
+
+      <ng-container matColumnDef="parent5">
+        <th class="filterRow" *matHeaderCellDef colspan="1">
+          <mat-form-field class="filterContent">
+            <input matInput (input)="setFilter('filter5', $event.target.value)" placeholder="Filter"
+              [matAutocomplete]="auto5" formControlName="filter5" />
+            <button mat-button mat-icon-button class="custom" matSuffix *ngIf="form.value.filter5 !== ''"
+              (click)="setFilter('filter5', '')">
+              <mat-icon matSuffix>close</mat-icon>
+            </button>
+            <mat-autocomplete #auto5="matAutocomplete" (optionSelected)="setFilter('filter5', $event.option.value)">
+              <mat-option *ngFor="let option of operationNames" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </th>
+      </ng-container>
+
+      <ng-container matColumnDef="parent6">
+        <th class="filterRow" *matHeaderCellDef colspan="1">
+          <mat-form-field class="filterContent">
+            <input matInput (input)="setFilter('filter6', $event.target.value)" placeholder="Filter"
+              [matAutocomplete]="auto6" formControlName="filter6" />
+            <button mat-button mat-icon-button class="custom" matSuffix *ngIf="form.value.filter3 !== ''"
+              (click)="setFilter('filter6', '')">
+              <mat-icon matSuffix>close</mat-icon>
+            </button>
+            <mat-autocomplete #auto6="matAutocomplete" (optionSelected)="setFilter('filter6', $event.option.value)">
+              <mat-option *ngFor="let option of batchJobNames" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </th>
+      </ng-container>
+
+      <ng-container matColumnDef="parent7">
+        <th class="filterRow" *matHeaderCellDef colspan="1"></th>
+      </ng-container>
+
+      <ng-container matColumnDef="parent8">
+        <th class="filterRow" *matHeaderCellDef colspan="1"></th>
+      </ng-container>
+
+
+      <!-- COLUMN INFO -->
+      <!--vin Col -->
+      <ng-container matColumnDef="vin">
+        <th mat-header-cell *matHeaderCellDef>VIN</th>
+        <td mat-cell *matCellDef="let item"> {{item.vin}} </td>
+      </ng-container>
+
+      <!--type Col -->
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>Type</th>
+        <td mat-cell *matCellDef="let item">{{item.type}} </td>
+      </ng-container>
+
+      <!--make Col -->
+      <ng-container matColumnDef="make">
+        <th mat-header-cell *matHeaderCellDef>Make</th>
+        <td mat-cell *matCellDef="let item">{{item.make}} </td>
+      </ng-container>
+
+      <!--model Col -->
+      <ng-container matColumnDef="model">
+        <th mat-header-cell *matHeaderCellDef>Model</th>
+        <td mat-cell *matCellDef="let item">{{item.model}} </td>
+      </ng-container>
+
+      <!--year Col -->
+      <ng-container matColumnDef="year">
+        <th mat-header-cell *matHeaderCellDef>year</th>
+        <td mat-cell *matCellDef="let item">{{item.year}} </td>
+      </ng-container>
+
+      <!--colors Col -->
+      <ng-container matColumnDef="colors">
+        <th mat-header-cell *matHeaderCellDef>Colors</th>
+        <td mat-cell *matCellDef="let item">{{item.colors}} </td>
+      </ng-container>
+
+      <!--mileage Col -->
+      <ng-container matColumnDef="mileage">
+        <th mat-header-cell *matHeaderCellDef>Mileage</th>
+        <td mat-cell *matCellDef="let item">{{item.mileage}} </td>
+      </ng-container>
+
+      <!--price Col -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef>Price</th>
+        <td mat-cell *matCellDef="let item">{{item.purchasePrice}} </td>
+      </ng-container>
+
+      <!-- ROW Info-->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+
+
+      <tr class="filterRow" mat-header-row *matHeaderRowDef="[
+    'parent1',
+    'parent2',
+    'parent3',
+    'parent4',
+    'parent5',
+    'parent6',
+    'parent7',
+    'parent8'
+  ]"></tr>
+
+
+
+      <tr class="btn-item" mat-row *matRowDef="let rowData; columns: displayedColumns;"
+        [ngClass]="{'highlight': selectedRowIndex == rowData.id}" (click)="viewDetails(rowData)"></tr>
+
+    </table>
+  </div>
+
+  <h4 *ngIf="vehicles.length == 0">Sorry, it looks like we don’t have that in stock!</h4>
+  <br>
+  <br>
+
 </form>
-
-
-<br>
-<br>
-
-
-<h3 *ngIf="vehicles.length > 0">Vehicles</h3>
-<table mat-table [dataSource]="vehicles" class="mat-elevation-z8" *ngIf="vehicles.length > 0">
-  <!-- COLUMN INFO -->
-  <!--vin Col -->
-  <ng-container matColumnDef="vin">
-    <th mat-header-cell *matHeaderCellDef>VIN</th>
-    <td mat-cell *matCellDef="let item"> {{item.vin}} </td>
-  </ng-container>
-
-  <!--type Col -->
-  <ng-container matColumnDef="type">
-    <th mat-header-cell *matHeaderCellDef>Type</th>
-    <td mat-cell *matCellDef="let item">{{item.type}} </td>
-  </ng-container>
-
-  <!--make Col -->
-  <ng-container matColumnDef="make">
-    <th mat-header-cell *matHeaderCellDef>Make</th>
-    <td mat-cell *matCellDef="let item">{{item.make}} </td>
-  </ng-container>
-
-  <!--model Col -->
-  <ng-container matColumnDef="model">
-    <th mat-header-cell *matHeaderCellDef>Model</th>
-    <td mat-cell *matCellDef="let item">{{item.model}} </td>
-  </ng-container>
-
-  <!--year Col -->
-  <ng-container matColumnDef="year">
-    <th mat-header-cell *matHeaderCellDef>year</th>
-    <td mat-cell *matCellDef="let item">{{item.year}} </td>
-  </ng-container>
-
-  <!--colors Col -->
-  <ng-container matColumnDef="colors">
-    <th mat-header-cell *matHeaderCellDef>Colors</th>
-    <td mat-cell *matCellDef="let item">{{item.colors}} </td>
-  </ng-container>
-
-  <!--mileage Col -->
-  <ng-container matColumnDef="mileage">
-    <th mat-header-cell *matHeaderCellDef>Mileage</th>
-    <td mat-cell *matCellDef="let item">{{item.mileage}} </td>
-  </ng-container>
-
-  <!--price Col -->
-  <ng-container matColumnDef="price">
-    <th mat-header-cell *matHeaderCellDef>Price</th>
-    <td mat-cell *matCellDef="let item">{{item.purchasePrice}} </td>
-  </ng-container>
-
-  <!-- ROW Info-->
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr class="btn-item" mat-row *matRowDef="let rowData; columns: displayedColumns;"
-    [ngClass]="{'highlight': selectedRowIndex == rowData.id}" (click)="viewDetails(rowData)"></tr>
-
-</table>
-
-<h4 *ngIf="vehicles.length == 0">Sorry, it looks like we don’t have that in stock!</h4>
-<br>
-<br>

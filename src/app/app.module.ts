@@ -11,19 +11,39 @@ import { SearchPageComponent } from './search-page/search-page.component';
 import { PurchasedVehicleFormComponent } from './purchased-vehicle-form/purchased-vehicle-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { MatTableModule } from '@angular/material/table';
+// import { MatTableModule } from '@angular/material/table';
 import { VehicleDetailsFormComponent } from './vehicle-details-form/vehicle-details-form.component';
 import { PartOrderFormComponent } from './part-order-form/part-order-form.component';
 import { SaleOrderFormComponent } from './sale-order-form/sale-order-form.component';
 import { ReportsPageComponent } from './reports-page/reports-page.component';
 import {
 	MatRippleModule,
-	MatInputModule,
 	MatFormFieldModule,
-	MatSelectModule,
+	MatAutocompleteModule,
+	MatCheckboxModule,
+	MatIconModule,
+	MatInputModule,
+	MatRadioModule,
+	MatButtonModule,
 	MatDatepickerModule,
-	MatNativeDateModule
+	MatButtonToggleModule,
+	MatTabsModule,
+	MatTableModule,
+	MatPaginatorModule,
+	MatTooltipModule,
+	MatBottomSheetModule,
+	MatSortModule,
+	MatSelectModule,
+	MatExpansionModule,
+	MatGridListModule,
+	MatProgressSpinnerModule,
+	MatDialogModule,
+	MatChipsModule,
+	MatCardModule,
+	MatNativeDateModule,
+	MatMenuModule
 } from '@angular/material';
+
 import { AddCustomerFormComponent } from './add-customer-form/add-customer-form.component';
 
 const routes: Routes = [
@@ -64,7 +84,25 @@ const routes: Routes = [
 		FormsModule,
 		MatRippleModule,
 		MatDatepickerModule,
-		MatNativeDateModule
+		MatNativeDateModule,
+		MatAutocompleteModule,
+		MatCheckboxModule,
+		MatIconModule,
+		MatRadioModule,
+		MatButtonModule,
+		MatButtonToggleModule,
+		MatTabsModule,
+		MatPaginatorModule,
+		MatTooltipModule,
+		MatBottomSheetModule,
+		MatSortModule,
+		MatExpansionModule,
+		MatGridListModule,
+		MatProgressSpinnerModule,
+		MatDialogModule,
+		MatChipsModule,
+		MatCardModule,
+		MatMenuModule
 	],
 	providers: [ { provide: LOCALE_ID, useValue: 'en-US' } ],
 	bootstrap: [ AppComponent ]
