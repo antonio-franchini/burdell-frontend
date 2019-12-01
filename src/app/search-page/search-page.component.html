@@ -1,68 +1,21 @@
 <br>
 
-<h1>Search Page</h1>
+<h1>Vehicles list</h1>
 <form [formGroup]="form" (ngSubmit)="searchVehicles()">
   <div class="mt-5">
 
-    <div>
       <mat-form-field>
-        <mat-select placeholder="Status" formControlName="status" name="status">
+        <mat-select placeholder="Filter by status" formControlName="status" name="status">
           <mat-option *ngFor="let status of statuses" [value]="status">{{status}}</mat-option>
         </mat-select>
       </mat-form-field>
-    </div>
 
-    <div>
       <mat-form-field>
-        <mat-select placeholder="Colors" formControlName="colors" name="colors">
-          <mat-option *ngFor="let color of colors" [value]="color.color">
-            {{color.color}}
-          </mat-option>
-        </mat-select>
+          <input matInput placeholder="Filter by keyword" type="text" class="form-control" formControlName="keyword">
       </mat-form-field>
-    </div>
 
     <div>
-      <mat-form-field>
-        <mat-select placeholder="Type" formControlName="type" name="type">
-          <mat-option *ngFor="let vehicleType of vehicleTypes" [value]="vehicleType.type">
-            {{vehicleType.type}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-
-    <div>
-      <mat-form-field>
-        <mat-select placeholder="Make" formControlName="make" name="make">
-          <mat-option *ngFor="let vehicleMake of vehicleMakes" [value]="vehicleMake.make">
-            {{vehicleMake.make}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-
-    <div class="form-group">
-      <label>Model:</label>
-      <input type="text" class="form-control" formControlName="model">
-    </div>
-    <div class="form-group">
-      <label>Year:</label>
-      <input type="text" class="form-control" formControlName="year">
-    </div>
-
-
-    <div class="form-group">
-      <label>Keyword:</label>
-      <input type="text" class="form-control" formControlName="keyword">
-    </div>
-    <div class="form-group" *ngIf="stateService.isAuthenticated()">
-      <label>VIN:</label>
-      <input type="text" class="form-control" formControlName="vin">
-    </div>
-
-    <div>
-      <button type="submit" class="btn btn-primary">Search</button>
+      <button type="submit" class="btn btn-primary">Apply filters</button>
       <a routerLink="/purchased-vehicle-form"><button type="submit" class="btn btn-primary"
           *ngIf="stateService.permissionMatches('inventory clerk')">Add Vehicle</button></a>
 
@@ -84,53 +37,31 @@
       <ng-container matColumnDef="parent1">
         <th class="filterRow" *matHeaderCellDef colspan="1">
           <mat-form-field class="filterContent">
-            <input matInput (input)="setFilter('filter1', $event.target.value)" placeholder="Filter"
-              [matAutocomplete]="auto1" formControlName="filter1" />
-            <button mat-button mat-icon-button class="custom" matSuffix *ngIf="form.value.filter1 !== ''"
-              (click)="setFilter('filter1', '')">
-              <mat-icon matSuffix>close</mat-icon>
-            </button>
-            <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="setFilter('filter1', $event.option.value)">
-              <mat-option *ngFor="let option of productNames" [value]="option">
-                {{ option }}
-              </mat-option>
-            </mat-autocomplete>
+            <input matInput placeholder="Filter" type="text" class="form-control" formControlName="vin">
           </mat-form-field>
         </th>
       </ng-container>
 
       <ng-container matColumnDef="parent2">
         <th class="filterRow" *matHeaderCellDef colspan="1">
-          <mat-form-field class="filterContent">
-            <input matInput (input)="setFilter('filter2', $event.target.value)" placeholder="Filter"
-              [matAutocomplete]="auto2" formControlName="filter2" />
-            <button mat-button mat-icon-button class="custom" matSuffix *ngIf="form.value.filter2 !== ''"
-              (click)="setFilter('filter2', '')">
-              <mat-icon matSuffix>close</mat-icon>
-            </button>
-            <mat-autocomplete #auto2="matAutocomplete" (optionSelected)="setFilter('filter2', $event.option.value)">
-              <mat-option *ngFor="let option of operationNames" [value]="option">
-                {{ option }}
+          <mat-form-field>
+            <mat-select placeholder="Type" formControlName="type" name="type">
+              <mat-option *ngFor="let vehicleType of vehicleTypes" [value]="vehicleType.type">
+                {{vehicleType.type}}
               </mat-option>
-            </mat-autocomplete>
+            </mat-select>
           </mat-form-field>
         </th>
       </ng-container>
 
       <ng-container matColumnDef="parent3">
         <th class="filterRow" *matHeaderCellDef colspan="1">
-          <mat-form-field class="filterContent">
-            <input matInput (input)="setFilter('filter3', $event.target.value)" placeholder="Filter"
-              [matAutocomplete]="auto3" formControlName="filter3" />
-            <button mat-button mat-icon-button class="custom" matSuffix *ngIf="form.value.filter3 !== ''"
-              (click)="setFilter('filter3', '')">
-              <mat-icon matSuffix>close</mat-icon>
-            </button>
-            <mat-autocomplete #auto3="matAutocomplete" (optionSelected)="setFilter('filter3', $event.option.value)">
-              <mat-option *ngFor="let option of batchJobNames" [value]="option">
-                {{ option }}
+          <mat-form-field>
+            <mat-select placeholder="Make" formControlName="make" name="make">
+              <mat-option *ngFor="let vehicleMake of vehicleMakes" [value]="vehicleMake.make">
+                {{vehicleMake.make}}
               </mat-option>
-            </mat-autocomplete>
+            </mat-select>
           </mat-form-field>
         </th>
       </ng-container>
@@ -138,17 +69,7 @@
       <ng-container matColumnDef="parent4">
         <th class="filterRow" *matHeaderCellDef colspan="1">
           <mat-form-field class="filterContent">
-            <input matInput (input)="setFilter('filter4', $event.target.value)" placeholder="Filter"
-              [matAutocomplete]="auto4" formControlName="filter4" />
-            <button mat-button mat-icon-button class="custom" matSuffix *ngIf="form.value.filter4 !== ''"
-              (click)="setFilter('filter4', '')">
-              <mat-icon matSuffix>close</mat-icon>
-            </button>
-            <mat-autocomplete #auto4="matAutocomplete" (optionSelected)="setFilter('filter4', $event.option.value)">
-              <mat-option *ngFor="let option of productNames" [value]="option">
-                {{ option }}
-              </mat-option>
-            </mat-autocomplete>
+            <input matInput placeholder="Filter" type="text" class="form-control" formControlName="model">
           </mat-form-field>
         </th>
       </ng-container>
@@ -156,35 +77,19 @@
       <ng-container matColumnDef="parent5">
         <th class="filterRow" *matHeaderCellDef colspan="1">
           <mat-form-field class="filterContent">
-            <input matInput (input)="setFilter('filter5', $event.target.value)" placeholder="Filter"
-              [matAutocomplete]="auto5" formControlName="filter5" />
-            <button mat-button mat-icon-button class="custom" matSuffix *ngIf="form.value.filter5 !== ''"
-              (click)="setFilter('filter5', '')">
-              <mat-icon matSuffix>close</mat-icon>
-            </button>
-            <mat-autocomplete #auto5="matAutocomplete" (optionSelected)="setFilter('filter5', $event.option.value)">
-              <mat-option *ngFor="let option of operationNames" [value]="option">
-                {{ option }}
-              </mat-option>
-            </mat-autocomplete>
+            <input matInput placeholder="Filter" type="text" class="form-control" formControlName="year">
           </mat-form-field>
         </th>
       </ng-container>
 
       <ng-container matColumnDef="parent6">
         <th class="filterRow" *matHeaderCellDef colspan="1">
-          <mat-form-field class="filterContent">
-            <input matInput (input)="setFilter('filter6', $event.target.value)" placeholder="Filter"
-              [matAutocomplete]="auto6" formControlName="filter6" />
-            <button mat-button mat-icon-button class="custom" matSuffix *ngIf="form.value.filter3 !== ''"
-              (click)="setFilter('filter6', '')">
-              <mat-icon matSuffix>close</mat-icon>
-            </button>
-            <mat-autocomplete #auto6="matAutocomplete" (optionSelected)="setFilter('filter6', $event.option.value)">
-              <mat-option *ngFor="let option of batchJobNames" [value]="option">
-                {{ option }}
+          <mat-form-field class="filterRowWrapper">
+            <mat-select placeholder="Filter" formControlName="colors" name="colors">
+              <mat-option *ngFor="let color of colors" [value]="color.color">
+                {{color.color}}
               </mat-option>
-            </mat-autocomplete>
+            </mat-select>
           </mat-form-field>
         </th>
       </ng-container>
@@ -250,8 +155,6 @@
       <!-- ROW Info-->
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 
-
-
       <tr class="filterRow" mat-header-row *matHeaderRowDef="[
     'parent1',
     'parent2',
@@ -262,8 +165,6 @@
     'parent7',
     'parent8'
   ]"></tr>
-
-
 
       <tr class="btn-item" mat-row *matRowDef="let rowData; columns: displayedColumns;"
         [ngClass]="{'highlight': selectedRowIndex == rowData.id}" (click)="viewDetails(rowData)"></tr>

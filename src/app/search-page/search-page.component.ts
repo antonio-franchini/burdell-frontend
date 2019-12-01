@@ -46,12 +46,12 @@ export class SearchPageComponent implements OnInit {
 	) {
 		this.buildForm();
 		this.dataSource.filterPredicate = (data: Vehicle, filter: string) => {
-			const vin = data.vin.trim().toLowerCase().indexOf(this.form.value.filter1) !== -1;
-			const type = data.type.trim().toLowerCase().indexOf(this.form.value.filter2) !== -1;
-			const make = data.make.trim().toLowerCase().indexOf(this.form.value.filter3) !== -1;
-			const model = data.model.trim().toLowerCase().indexOf(this.form.value.filter4) !== -1;
-			const year = data.year.trim().toLowerCase().indexOf(this.form.value.filter5) !== -1;
-			const colors = data.colors.trim().toLowerCase().indexOf(this.form.value.filter6) !== -1;
+			const vin = data.vin.trim().toLowerCase().indexOf(this.form.value.vinFilter) !== -1;
+			const type = data.type.trim().toLowerCase().indexOf(this.form.value.typeFilter) !== -1;
+			const make = data.make.trim().toLowerCase().indexOf(this.form.value.makeFilter) !== -1;
+			const model = data.model.trim().toLowerCase().indexOf(this.form.value.modelFilter) !== -1;
+			const year = data.year.trim().toLowerCase().indexOf(this.form.value.yearFilter) !== -1;
+			const colors = data.colors.trim().toLowerCase().indexOf(this.form.value.colorFilter) !== -1;
 			return vin && type && make && model && year && colors;
 		};
 	}
@@ -74,12 +74,12 @@ export class SearchPageComponent implements OnInit {
 			keyword: [ null ],
 			vin: [ null ],
 			status: [ null ],
-			filter1: '',
-			filter2: '',
-			filter3: '',
-			filter4: '',
-			filter5: '',
-			filter6: ''
+			vinFilter: '',
+			typeFilter: '',
+			makeFilter: '',
+			modelFilter: '',
+			yearFilter: '',
+			colorFilter: ''
 		});
 	}
 
