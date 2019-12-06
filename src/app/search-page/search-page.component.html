@@ -1,24 +1,39 @@
-<br>
-
 <h1>Vehicles list</h1>
 <form [formGroup]="form" (ngSubmit)="searchVehicles()">
-  <div class="mt-5">
 
-      <mat-form-field>
-        <mat-select placeholder="Filter by status" formControlName="status" name="status">
-          <mat-option *ngFor="let status of statuses" [value]="status">{{status}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field>
-          <input matInput placeholder="Filter by keyword" type="text" class="form-control" formControlName="keyword">
-      </mat-form-field>
+  <div class="outer-box">
+    <div>
+      <h3>Filters:</h3>
+    </div>
+    <div class="box">
+      <input placeholder="VIN" type="text" class="form-control item" formControlName="vin">
+      <mat-select class="form-control item" placeholder="Type" formControlName="type" name="type">
+        <mat-option *ngFor="let vehicleType of vehicleTypes" [value]="vehicleType.type">
+          {{vehicleType.type}}
+        </mat-option>
+      </mat-select>
+      <mat-select class="form-control item" placeholder="Make" formControlName="make" name="make">
+        <mat-option *ngFor="let vehicleMake of vehicleMakes" [value]="vehicleMake.make">
+          {{vehicleMake.make}}
+        </mat-option>
+      </mat-select>
+      <input placeholder="Model" type="text" class="form-control item" formControlName="model">
+      <input placeholder="Year" type="text" class="form-control item" formControlName="year">
+      <mat-select class="form-control item" placeholder="Color" formControlName="colors" name="colors">
+        <mat-option *ngFor="let color of colors" [value]="color.color">
+          {{color.color}}
+        </mat-option>
+      </mat-select>
+      <mat-select class="form-control item" placeholder="Status" formControlName="status" name="status">
+        <mat-option *ngFor="let status of statuses" [value]="status">{{status}}</mat-option>
+      </mat-select>
+      <input placeholder="Keyword" type="text" class="form-control item" formControlName="keyword">
+    </div>
 
     <div>
       <button type="submit" class="btn btn-primary">Apply filters</button>
       <a routerLink="/purchased-vehicle-form"><button type="submit" class="btn btn-primary"
           *ngIf="stateService.permissionMatches('inventory clerk')">Add Vehicle</button></a>
-
       <a routerLink="/reports-page"><button type="submit" class="btn btn-primary"
           *ngIf="stateService.permissionMatches('manager')">View Reports</button></a>
     </div>
@@ -33,75 +48,6 @@
   <h3 *ngIf="vehicles.length > 0">Vehicles</h3>
   <div>
     <table mat-table [dataSource]="vehicles" class="mat-elevation-z8" *ngIf="vehicles.length > 0">
-
-      <ng-container matColumnDef="parent1">
-        <th class="filterRow" *matHeaderCellDef colspan="1">
-          <mat-form-field class="filterContent">
-            <input matInput placeholder="Filter" type="text" class="form-control" formControlName="vin">
-          </mat-form-field>
-        </th>
-      </ng-container>
-
-      <ng-container matColumnDef="parent2">
-        <th class="filterRow" *matHeaderCellDef colspan="1">
-          <mat-form-field>
-            <mat-select placeholder="Type" formControlName="type" name="type">
-              <mat-option *ngFor="let vehicleType of vehicleTypes" [value]="vehicleType.type">
-                {{vehicleType.type}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </th>
-      </ng-container>
-
-      <ng-container matColumnDef="parent3">
-        <th class="filterRow" *matHeaderCellDef colspan="1">
-          <mat-form-field>
-            <mat-select placeholder="Make" formControlName="make" name="make">
-              <mat-option *ngFor="let vehicleMake of vehicleMakes" [value]="vehicleMake.make">
-                {{vehicleMake.make}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </th>
-      </ng-container>
-
-      <ng-container matColumnDef="parent4">
-        <th class="filterRow" *matHeaderCellDef colspan="1">
-          <mat-form-field class="filterContent">
-            <input matInput placeholder="Filter" type="text" class="form-control" formControlName="model">
-          </mat-form-field>
-        </th>
-      </ng-container>
-
-      <ng-container matColumnDef="parent5">
-        <th class="filterRow" *matHeaderCellDef colspan="1">
-          <mat-form-field class="filterContent">
-            <input matInput placeholder="Filter" type="text" class="form-control" formControlName="year">
-          </mat-form-field>
-        </th>
-      </ng-container>
-
-      <ng-container matColumnDef="parent6">
-        <th class="filterRow" *matHeaderCellDef colspan="1">
-          <mat-form-field class="filterRowWrapper">
-            <mat-select placeholder="Filter" formControlName="colors" name="colors">
-              <mat-option *ngFor="let color of colors" [value]="color.color">
-                {{color.color}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </th>
-      </ng-container>
-
-      <ng-container matColumnDef="parent7">
-        <th class="filterRow" *matHeaderCellDef colspan="1"></th>
-      </ng-container>
-
-      <ng-container matColumnDef="parent8">
-        <th class="filterRow" *matHeaderCellDef colspan="1"></th>
-      </ng-container>
-
 
       <!-- COLUMN INFO -->
       <!--vin Col -->
@@ -154,17 +100,6 @@
 
       <!-- ROW Info-->
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-
-      <tr class="filterRow" mat-header-row *matHeaderRowDef="[
-    'parent1',
-    'parent2',
-    'parent3',
-    'parent4',
-    'parent5',
-    'parent6',
-    'parent7',
-    'parent8'
-  ]"></tr>
 
       <tr class="btn-item" mat-row *matRowDef="let rowData; columns: displayedColumns;"
         [ngClass]="{'highlight': selectedRowIndex == rowData.id}" (click)="viewDetails(rowData)"></tr>

@@ -7,7 +7,6 @@ import { MatTableDataSource } from '@angular/material';
 import { StateService } from '../services/state.service';
 import { Router } from '@angular/router';
 import { VehicleSearch } from '../models/VehicleSearch';
-import { Customer } from '../models/Customer';
 import { VehicleType } from '../models/VehicleType';
 import { VehicleMake } from '../models/VehicleMake';
 import { Color } from '../models/Color';
@@ -28,10 +27,6 @@ export class SearchPageComponent implements OnInit {
 	colors: Array<Color> = [];
 	statuses: Array<string> = [ 'Sold', 'Unsold' ];
 
-	productNames: string[];
-	operationNames: string[];
-	batchJobNames: string[];
-
 	jsonHeader() {
 		return new HttpHeaders({
 			'Content-Type': 'application/json'
@@ -45,23 +40,6 @@ export class SearchPageComponent implements OnInit {
 		private stateService: StateService
 	) {
 		this.buildForm();
-		this.dataSource.filterPredicate = (data: Vehicle, filter: string) => {
-			const vin = data.vin.trim().toLowerCase().indexOf(this.form.value.vinFilter) !== -1;
-			const type = data.type.trim().toLowerCase().indexOf(this.form.value.typeFilter) !== -1;
-			const make = data.make.trim().toLowerCase().indexOf(this.form.value.makeFilter) !== -1;
-			const model = data.model.trim().toLowerCase().indexOf(this.form.value.modelFilter) !== -1;
-			const year = data.year.trim().toLowerCase().indexOf(this.form.value.yearFilter) !== -1;
-			const colors = data.colors.trim().toLowerCase().indexOf(this.form.value.colorFilter) !== -1;
-			return vin && type && make && model && year && colors;
-		};
-	}
-
-	setFilter(filterNumber: string, filter: string) {
-		this.form.controls[filterNumber].setValue(filter.trim().toLowerCase());
-
-		/* this.dataSource.filter needs to be set to something other than the empty string,
-		this triggers filterPredicate to be called */
-		this.dataSource.filter = 'stub';
 	}
 
 	buildForm(): void {
@@ -73,13 +51,7 @@ export class SearchPageComponent implements OnInit {
 			colors: [ null ],
 			keyword: [ null ],
 			vin: [ null ],
-			status: [ null ],
-			vinFilter: '',
-			typeFilter: '',
-			makeFilter: '',
-			modelFilter: '',
-			yearFilter: '',
-			colorFilter: ''
+			status: [ null ]
 		});
 	}
 
