@@ -26,6 +26,7 @@ export class SearchPageComponent implements OnInit {
 	vehicleTypes: Array<VehicleType> = [];
 	colors: Array<Color> = [];
 	statuses: Array<string> = [ 'Sold', 'Unsold' ];
+	stateService: StateService;
 
 	jsonHeader() {
 		return new HttpHeaders({
@@ -37,8 +38,9 @@ export class SearchPageComponent implements OnInit {
 		private formBuilder: FormBuilder,
 		private httpClient: HttpClient,
 		private router: Router,
-		private stateService: StateService
+		stateService: StateService
 	) {
+		this.stateService = stateService;
 		this.buildForm();
 	}
 

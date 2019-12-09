@@ -21,7 +21,7 @@
       <br>
 
 
-      <div formArrayName="parts" *ngFor="let part of form.get('parts').controls; let i = index;">
+      <div formArrayName="parts" *ngFor="let part of form.get('parts').value; let i = index;">
         <div [formGroupName]="i">
 
 

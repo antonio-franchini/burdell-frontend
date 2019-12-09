@@ -9,8 +9,10 @@ import { StateService } from '../services/state.service';
 export class HeaderComponent implements OnInit {
 	authenticated: boolean = false;
 	permission: string = '';
+	stateService: StateService;
 
-	constructor(private stateService: StateService) {
+	constructor(stateService: StateService) {
+		this.stateService = stateService;
 		const profile = this.stateService.getCurrentProfile();
 		this.permission = profile == null ? null : profile.permission;
 	}

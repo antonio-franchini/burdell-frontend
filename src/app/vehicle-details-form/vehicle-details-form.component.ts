@@ -17,6 +17,7 @@ import { StateService } from '../services/state.service';
 	styleUrls: [ './vehicle-details-form.component.css' ]
 })
 export class VehicleDetailsFormComponent implements OnInit {
+	stateService: StateService;
 	vin: string;
 	vehicle: Vehicle = null;
 	salesPrice: Number;
@@ -50,8 +51,9 @@ export class VehicleDetailsFormComponent implements OnInit {
 		private router: Router,
 		private route: ActivatedRoute,
 		private changeDetectorRef: ChangeDetectorRef,
-		private stateService: StateService
+		stateService: StateService
 	) {
+		this.stateService = stateService;
 		this.vin = this.route.snapshot.paramMap.get('vin');
 	}
 

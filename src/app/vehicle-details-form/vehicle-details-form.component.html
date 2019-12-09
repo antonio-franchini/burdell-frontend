@@ -18,7 +18,7 @@
     </div>
 
     <!--Seller info (if applicable)-->
-    <div *ngIf="seller != null && (seller.type === 'individual' || seller.type === 'business') && stateService.permissionMatches('manager')">
+    <div *ngIf="seller != null && seller.business && stateService.permissionMatches('manager')">
         <br>
         <h5>Seller Information</h5>
         <div *ngIf="seller.type === 'individual'">
@@ -36,7 +36,7 @@
       </div>
   
     <!--Buyer info (if applicable)-->
-    <div *ngIf="buyer != null && (buyer.type === 'individual' || buyer.type === 'business') && stateService.permissionMatches('manager')">
+    <div *ngIf="buyer != null && buyer.business && stateService.permissionMatches('manager')">
         <br>
       <h5>Buyer Information</h5>
       <div *ngIf="buyer.type === 'individual'">
